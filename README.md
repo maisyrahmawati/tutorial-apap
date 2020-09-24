@@ -1,6 +1,6 @@
 # Tutorial APAP
 ## Authors
-* **<Maisy Rahmawati>** - *<1806147035>* - *<B>*
+* **Maisy Rahmawati** - *1806147035* - *B*
 
 ## Tutorial 1
 ### What I have learned today
