@@ -60,3 +60,62 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana mendeteksi dan mengetahui error di Intellij?
 - [ ] Bagaimana mengganti commit message di git?
 - [ ] Apa web yang bisa menjadi referensi agar mudah mempelajari penggunaan perintah git di cmd?
+
+## Tutorial 2
+### What I have learned today
+Pada tutorial ke-dua ini, saya mempelajari konsep tentang MVC dan bagaimana kita mengaplikasikan MVC tersebut.
+Selain itu, saya juga belajar untuk lebih memahami konsep dependency injection, walaupun sejujurnya masih terdapat
+beberapa konsep yang masih membingungkan.
+### Pertanyaan
+1. Pertanyaan 1: Cobalah untuk menambahkan sebuah resep dengan mengakses link berikut:
+http://localhost:8080/resep/add?noResep=1&namaDokter=Papa%20APAP&namaPasien=Quanta%20Fasilkom&catatan=Semangat
+Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi!
+Ketika saya mencoba menjalankan akses link tersebut, saya mendapatkan error, di mana link tersebut tidak dapat terakses.
+Menurut saya, hal tersebut dikarenakan pada saat kita membuat method public String addResep, di baris terakhir, kita
+melakukan return "add-resep". View yang kita return berupa add-resep tersebut belum kita buat HTML-nya (templatenya),
+sehingga sungguh mustahil jika kita dapat mengakses link tersebut disaat templatenya belum kita buat.
+2. Menurut kamu anotasi @Autowired pada class Controller tersebut merupakan implementasi dari konsep apa? 
+Dan jelaskan secara singkat cara kerja @Autowired tersebut dalam konteks service dan controller yang telah kamu buat!
+Menurut pendapat saya, anotasi @Autowired merupakan implementasi Dependency Injection.
+Sebelum membuat method-method di dalam class ResepController, kita terlebih dahulu menuliskan @Controller. Ini dimaksudkan
+untuk Spring Framework melakukan inisiasi terhadap class ResepController. Spring Framework juga akan melakukan injection
+(suntikan) terhadap kebergantungan (dependency) class tersebut. Dari pandangan saya, anotasi @Autowired dapat menggantikan
+peranan dari method setter atau penambahan argumen pada constructor saat kita akan melakukan injection terhadap dependency.
+Ketika kita menggunakan anotasi @Autowired, maka Spring Framework akan melakukan injection dengan objek yang bertipe sama 
+untuk dependency yang terjadi pada class tersebut. Pada kasus Controller dan Service yang telah dibuat, di dalam class
+ResepController, terdapat objek ResepService yang mana ResepService akan menentukan terbentuknya class ResepController.
+Atau kita dapat mengatakan bahwa class ResepController tidak dapat terbentuk tanpa terbentuknya ResepService (ada dependency
+antara ResepController dan ResepService). Selanjutnya, kita juga membuat class ResepInMemoryService yang mengimplement 
+ResepService. Dengan adanya implements ini, maka class ResepInMemoryService (khususnya method getResepByNomorResep) dapat 
+digunakan pada property ResepService di dalam class ResepController. Selanjutnya, anotasi @Autowired pada properti ResepService
+digunakan untuk injeksi ResepService yaitu ResepInMemoryService (khususnya method getResepByNomorResep).
+3. Cobalah untuk menambahkan sebuah resep dengan mengakses link berikut:
+http://localhost:8080/resep/add?noResep=1&namaDokter=Papa%20APAP&namaPasien=Quanta%20Fasilkom 
+Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi!
+Ketika saya mengakses link tersebut, yang muncul adalah Whitelabel Error Page. Menurut saya, hal ini dapat terjadi karena
+tidak ada 'catatan' yang dimasukkan sebagai parameter di dalam link tersebut. Sementara, ketika kita membuat objek ResepModel,
+terdapat parameter noResep, namaDokter, namaPasien, catatan yang harus kita masukkan sebagaimana yang telah didefinisikan pada class 
+ResepModel yang telah kita buat sebelumnya. Oleh karena itu, ketika kita mengklik link tersebut, kita justru mendapatkan whitelabel 
+error page. 
+4. Jika Papa APAP ingin melihat resep untuk pasien yang bernama Quanta, link apa yang harus diakses?
+http://localhost:8080/resep/view?noResep=1 (pasien Quanta memiliki nomor resep 1, jadi kita harus memasukkan parameter noResep=1)
+5. Tambahkan 1 contoh resep lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/resep/viewall , 
+apa yang akan ditampilkan? Sertakan juga bukti screenshotmu!
+Tampilan bahwa nomor resep yang kita yang kita masukkan berhasil ditambahkan, setelah masuk ke link resep/viewall, akan ditambilkan
+informasi dari apa yang kita telah masukkan.
+<img src="ss1.jpg" width="400">
+Setelah kita mengakses http://localhost:8080/resep/viewall
+<img src="ss2.jpg" width="400">
+### Latihan
+4. 
+5. 
+6. 
+7. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Kenapa saya harus belajar APAP?
+- [ ] Kenapa pakai VSCode susah ngerun?
+- [ ] Bagaimana mendeteksi dan mengetahui error di Intellij?
+- [ ] Bagaimana mengganti commit message di git?
+- [ ] Apa web yang bisa menjadi referensi agar mudah mempelajari penggunaan perintah git di cmd?
