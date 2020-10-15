@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,12 +22,12 @@ public class ResepServiceImpl implements ResepService {
 
     @Override
     public List<ResepModel> getResepList() {
-        return resepDb.findAll();
+        return resepDb.findAllByOrderByNoResepDesc();
     }
 
     @Override
-    public ResepModel getResepByNomorResep(Long noResep) {
-        return resepDb.findByNoResep(noResep).get();
+    public Optional<ResepModel> getResepByNomorResep(Long noResep) {
+        return resepDb.findByNoResep(noResep);
     }
 
     @Override
@@ -37,7 +38,12 @@ public class ResepServiceImpl implements ResepService {
     }
 
     @Override
-    public List<ResepModel> getAllResepDesc(){
-        return resepDb.findAllByOrderByIdDesc();
+    public void deleteResep(Long noResep) {
+        resepDb.deleteById(noResep);
     }
+
+    /*@Override
+    public List<ResepModel> getAllResepDesc(){
+        return resepDb.findAllByOrderByNoResepDesc();
+    }*/
 }

@@ -17,4 +17,21 @@ public class ObatServiceImpl implements ObatService {
     public void addObat(ObatModel obat) {
         obatDb.save(obat);
     }
+
+    @Override
+    public ObatModel getObatById(Long idObat){
+        return obatDb.findObatModelById(idObat);
+    }
+
+    @Override
+    public ObatModel changeObat(ObatModel obat){
+        obatDb.save(obat);
+
+        return obat;
+    }
+
+    @Override
+    public void deleteObatById(Long idObat){
+        obatDb.deleteById(idObat);
+    }
 }

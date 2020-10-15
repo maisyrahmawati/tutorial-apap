@@ -19,9 +19,6 @@ public class ResepController {
     @Autowired
     private ResepService resepService;
 
-    @Autowired
-    private ObatService obatService;
-
     @GetMapping("/")
     private String home() {
         return "home";
@@ -45,15 +42,20 @@ public class ResepController {
         return "add-resep";
     }
 
-    @GetMapping("/resep/change/{noResep}")
+    @GetMapping({"/resep/change/{noResep}", "/resep/change"})
     private String changeResepFormPage(
-            @PathVariable Long noResep,
+            @PathVariable(required = false) Long noResep,
             Model model
     ) {
-        ResepModel resep = resepService.getResepByNomorResep(noResep);
-        model.addAttribute("resep", resep);
+        if (noResep != null && isResepExists(noResep)) {
+            ResepModel resep = resepService.getResepByNomorResep(noResep).get();
+            model.addAttribute("resep", resep);
 
-        return "form-update-resep";
+            return "form-update-resep";
+        }
+        model.addAttribute("msg", "Nomor Resep Tidak Ditemukan atau Nomor Resep Tidak Ada!");
+
+        return "error";
     }
 
     @PostMapping("/resep/change")
@@ -72,21 +74,60 @@ public class ResepController {
             @RequestParam(value = "noResep") Long noResep,
             Model model
     ) {
-        ResepModel resep = resepService.getResepByNomorResep(noResep);
-        List<ObatModel> listObat = resep.getListobat();
+        if (noResep != null && isResepExists(noResep)) {
+            ResepModel resep = resepService.getResepByNomorResep(noResep).get();
+            List<ObatModel> listObat = resep.getListobat();
 
-        model.addAttribute("resep", resep);
-        model.addAttribute("listObat", listObat);
+            model.addAttribute("resep", resep);
+            model.addAttribute("title", "Daftar Obat:");
 
-        return "view-resep";
+            if (listObat.size() > 0) model.addAttribute("listObat", listObat);
+            else model.addAttribute("title", "Resep belum memiliki daftar obat");
+
+            return "view-resep";
+        }
+        model.addAttribute("msg", "Nomor Resep Tidak Ditemukan atau Nomor Resep Tidak Ada!");
+
+        return "error";
     }
 
     @GetMapping("/resep/viewall")
-    public String viewAllResep(Model model){
-        List<ResepModel> listResep = resepService.getAllResepDesc();
+    public String listResep(Model model) {
+        List<ResepModel> listResep = resepService.getResepList();
         model.addAttribute("listResep", listResep);
 
         return "viewall-resep";
+    }
+
+    @GetMapping({"/resep/delete/no-resep/{noResep}", "/resep/delete/no-resep"})
+    public String deleteResep(
+            @PathVariable(value = "noResep", required = false) Long noResep,
+            Model model
+    ) {
+        if (noResep != null) {
+            if (isResepExists(noResep) && !hasObat(noResep)) {
+                ResepModel resep = resepService.getResepByNomorResep(noResep).get();
+                model.addAttribute("resep", resep);
+                resepService.deleteResep(noResep);
+
+                return "delete-resep";
+            } else if (hasObat(noResep)) {
+                model.addAttribute("msg", "Resep masih memiliki obat! Hapus obat terlebih dahulu!");
+
+                return "error";
+            }
+        }
+        model.addAttribute("msg", "Nomor Resep Tidak Ditemukan atau Nomor Resep Tidak Ada!");
+
+        return "error";
+    }
+
+    private boolean isResepExists(Long noResep) {
+        return resepService.getResepByNomorResep(noResep).isPresent();
+    }
+
+    private boolean hasObat(Long noResep) {
+        return resepService.getResepByNomorResep(noResep).get().getListobat().size() != 0;
     }
 
 

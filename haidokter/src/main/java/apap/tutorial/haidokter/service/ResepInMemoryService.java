@@ -1,15 +1,17 @@
 package apap.tutorial.haidokter.service;
 
-/*
+
 import apap.tutorial.haidokter.model.ResepModel;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
-public class ResepInMemoryService implements ResepService{
+public class ResepInMemoryService implements ResepService {
     private List<ResepModel> listResep;
 
+    // Constructor
     public ResepInMemoryService(){
         listResep = new ArrayList<>();
     }
@@ -19,10 +21,10 @@ public class ResepInMemoryService implements ResepService{
         listResep.add(resep);
     }
 
-    @Override
+    /*@Override
     public void deleteResep(ResepModel resep){
         listResep.remove(resep);
-    }
+    }*/
 
     @Override
     public List<ResepModel> getResepList(){
@@ -30,6 +32,21 @@ public class ResepInMemoryService implements ResepService{
     }
 
     @Override
+    public Optional<ResepModel> getResepByNomorResep(Long noResep) {
+        return null;
+    }
+
+    @Override
+    public ResepModel updateResep(ResepModel resepModel) {
+        return null;
+    }
+
+    @Override
+    public void deleteResep(Long noResep) {
+
+    }
+
+    /*@Override
     public ResepModel getResepByNomorResep(String nomorResep){
         //ResepModel i;
         for(ResepModel i : listResep){
@@ -41,6 +58,6 @@ public class ResepInMemoryService implements ResepService{
             }
         }
         return null;
-    }
+    }*/
 }
-*/
+
