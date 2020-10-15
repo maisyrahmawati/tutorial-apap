@@ -119,3 +119,54 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana mendeteksi dan mengetahui error di Intellij?
 - [ ] Bagaimana mengganti commit message di git?
 - [ ] Apa web yang bisa menjadi referensi agar mudah mempelajari penggunaan perintah git di cmd?
+
+## Tutorial 3
+### What I have learned today
+Pada tutorial-3 ini saya mempelajari tentang bagaiaman menghubungkan antara database dengan program Java, yaitu
+hitungbmi. Selain itu, saya juga mempelajari penggunaan ORM, meskipun masih belum memahami konsep ORM itu sendiri.
+Selain itu, saya juga mempelajari tentang Qualifier.
+### Pertanyaan
+1. Pada class ResepDb, terdapat method findByNoResep, apakah kegunaan dari method tersebut?
+Method findByNoResep terdapat pada interface ResepDb yang mengekstend JpaRepository. Method ini berfungsi untuk
+mencari atau menemukan data-data di dalam database berdasarkan nomor resep. Oleh karena itu, method ini memiliki
+parameter berupa nomor resep bertipe Long, yang mana nomor resep ini yang akan menjadi acuan pencarian dari data-
+data di dalam database. Misalkan pada class ResepServiceImpl, method ini digunakan di dalam method getResepByNomorResep
+yang akan mengambil data berdasarkan nomor resep dengan mencari data dari database berdasarkan nomor resep tersebut
+(method findByNoResep).
+2. Pada class ResepController, jelaskan perbedaan method addResepFormPage dan addResepSubmit?
+Method addResepFormPage menggunakan anotasi GetMapping, di mana anotasi ini berfungsi untuk method GET untuk mengakses 
+form page resep. Melalui anotasi GetMapping tersebut, maka akan dilakukan routing ke path url localhost:8080/resep/add 
+dan data yang direquest oleh browser hanya akan ditampilkan pada path url tersebut. Sebaliknya method addResepSubmit 
+menggunakan anotasi PostMapping. Sesuai namanya, anotasi ini berfungsi untuk method POST, dimana data yang telah diisi
+oleh user melalui form akan dikirimkan (disubmit) untuk ditampung (disimpan).
+3. Jelaskan kegunaan dari JPA Repository!
+JPA merupakan salah satu standar yang digunakan untuk mengakses database di dalam Java. JPA pada dasarnya menggunakan
+ORM (Objek Relational Mapping), yang mana diimplementasikan oleh Hibernate. JPA Repositoru ini berfungsi untuk memudahkan
+kita dalam membangun aplikasi, karena di dalamnya terdapat fungsi-fungsi CRUD dasar (Create, Read, Update, Delete), sehingga
+kita dapat langsung mengimplementasikan fungsi-fungsi tersebut tanpa harus membuat fungsi sendiri.
+4. Sebutkan dan jelaskan di bagian kode mana sebuah relasi antara ResepModel dan ObatModel dibuat?
+Menurut code yang ada di dalam ResepModel dan ObatModel, pada bagian @JoinColumn(name="resep_id",referencedColumnName="no_resep",
+nullable=false) di dalam class ObatModel. Hal ini karena dengan adanya anotasi JoinColumn, maka ada kolom yang direference oleh
+ObatModel, yaitu kolom no_resep pada ResepModel, sehingga dengan adanya JoinColumn ini maka akan ada relasi antara ResepModel
+dan ObatModel.
+5. Jelaskan kegunaan FetchType.LAZY, CascadeType.ALL, dan FetchType.EAGER!
+FetchType terdapat pada Hibernate, yang digunakan dalam penentuan load collection object (child) setelah parentnya di-fetch,
+apakah akan di-load semua collection object (child) atau tidak. FetchType.LAZY akan me-load collection object (child)
+jika dibutuhkan dalam method getter. Artinya FetchType.LAZY tidak akan me-load semua collection object (child) setelah
+parentnya di-fetch. Sebaliknya, FetchType.EAGER akan me-load semua collection object (child) setelah parentnya di-fetch.
+Sementara itu, Cascade pada dasarnya digunakan sebagai operasi antara tabel relasi, dimana adanya type ALL pada cascade
+memungkinkan semua operasi cascade akan diterapkan pada entitas-entitas yang terkait. Misalkan entitas A dihapus, maka
+entitas yang terkait dengan entitas A akan dihapus juga.
+### Latihan
+4. 
+5. 
+6. 
+7. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Kenapa saya sering mengalami troubel pada Hibernate?
+- [ ] Bagaimana penjelasan lebih lanjut tentang ORM?
+- [ ] Bagaimana mendeteksi dan mengetahui error di Intellij?
+- [ ] Bagaimana mengganti commit message di git?
+- [ ] Beberapa method dalam tutorial masih belum bisa dipahami
