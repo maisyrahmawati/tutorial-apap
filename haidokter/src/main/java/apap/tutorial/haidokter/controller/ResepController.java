@@ -76,12 +76,12 @@ public class ResepController {
     ) {
         if (noResep != null && isResepExists(noResep)) {
             ResepModel resep = resepService.getResepByNomorResep(noResep).get();
-            List<ObatModel> listObat = resep.getListobat();
+            List<ObatModel> listobat = resep.getListobat();
 
             model.addAttribute("resep", resep);
             model.addAttribute("title", "Daftar Obat:");
 
-            if (listObat.size() > 0) model.addAttribute("listObat", listObat);
+            if (listobat.size() > 0) model.addAttribute("listobat", listobat);
             else model.addAttribute("title", "Resep belum memiliki daftar obat");
 
             return "view-resep";

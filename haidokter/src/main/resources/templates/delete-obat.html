@@ -8,7 +8,9 @@
 </head>
 <body>
     <nav th:replace="fragments/fragment :: navbar"></nav>
-    <h3 th:text="'Obat ' + ${obat} + ' telah berhasil dihapus'"></h3>
-    <a th:href="@{/}">Home</a>
+    <div class="container-fluid">
+        <h3 th:text="${obatCount} + ' Obat telah berhasil dihapus'"></h3>
+        <a th:href="@{/}">Kembali ke home</a>
+    </div>
 </body>
 </html>
