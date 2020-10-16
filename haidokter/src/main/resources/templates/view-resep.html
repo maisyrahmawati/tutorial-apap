@@ -36,6 +36,8 @@
                 <td th:if="${obat.bentuk == 1}">Kapsul</td>
                 <td th:if="${obat.bentuk == 2}">Sirup</td>
                 <td th:text="${obat.kuantitas}"></td>
+                <td th:if="${obat.kuantitas <= 5}">Stok hampir habis</td>
+                <td th:unless="${obat.kuantitas <= 5}">Stok masih banyak</td>
                 <td>
                     <a th:href="@{/obat/change/} + ${obat.id}">Change Obat</a>
                     <a th:href="@{/obat/delete/} + ${obat.id}">Delete Obat</a>
