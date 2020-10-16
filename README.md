@@ -170,3 +170,45 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana mendeteksi dan mengetahui error di Intellij?
 - [ ] Bagaimana mengganti commit message di git?
 - [ ] Beberapa method dalam tutorial masih belum bisa dipahami
+
+## Tutorial 4
+### What I have learned today
+Pada tutorial ini, saya mempelajari banyak materi terkait thymeleaf. Walaupun sejujurnya saya masih mengalami cukup
+kesulitan karena saya juga harus mengingat-ingat kembali materi PPW yang berkaitan dengan materi yang saya pelajari
+saat ini.
+### Pertanyaan
+1. Jelaskan perbedaan th:include dan th:replace!
+Ketika kita menggunakan include yaitu: <div th:include = "...">Something</div> maka pada kondisi ini, fragment akan 
+ditempatkan di dalam tag <div>
+Sedangkan ketika kita menggunakan replace: <div th:replace = "...">Something</div> maka pada kondisi ini, <div> akan 
+digantikan oleh Something.
+Melalui Thymeleaf, kita dapat menyertakan bagian halaman lain sebagai fragment menggunakan th: include (akan menyertakan 
+konten fragmen ke dalam tag host-nya) atau th: replace yang akan menggantikan tag host dengan fragmen. Jika dilihat dari 
+fungsionalitasnya, th:include akan memasukkan fragmen yang ditentukan sebagai bagian dari tag host-nya tetapi tidak
+menyertakan tag fragmen. Sementara itu, th:replace akan menggantikan tag host dengan fragmen, dengan menghapus tag host 
+dan menggantikan tag host, th:replace akan menambahkan fragmen yang ditentukan termasuk tag fragmen.
+2. Jelaskan apa fungsi dari th:object!
+th:object merupakan salah satu penerapan tag thymeleaf yang digunakan untuk menampung objek yang berasal dari controller. 
+Contohnya th:object="${obat}, maka objek obat akan ditampung oleh th:object.
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?
+$ atau variable expressions dapat dilihat sebagai attribute values atau bagian darinya, depending on the attribute. 
+Variable expressions tidak hanya dapat melibatkan proses output tetapi juga pemrosesan yang lebih kompleks seperti 
+conditional dan iterasi. Sementara itu, * atau selection expressions hampir sama dengan variable expressions hanya 
+saja selection expressions akan dieksekusi pada objek yang dipilih sebelumnya bukan pada variable map secara keseluruhan. 
+Objek yang terlibat akan ditampung dalam th:object. Variable expressions dapat kita gunakan ketika kita sedang melakukan
+iterasi atau membuat conditional expression. Sedangkan selection expression dapat kita gunakan ketika kita melakukan
+mapping.
+4. Bagaimana kamu menyelesaikan latihan nomor 3?
+Sebenarnya saya belum menyelesaikan latihan nomor 3 karena saya masih kurang memahami cara mengirim variabel ke fragment.
+Tetapi, ide yang saya dapatkan yaitu dengan menetapkan suatu argumen dari suatu method lalu kita mengambil argumen tersebut
+dari fragment. Selain itu, saya juga memikirkan adanya implement sebagai cara untuk berkomunikasi dengan fragment.
+### Latihan
+Di dalam kode. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Kenapa saya sering mengalami troubel pada Hibernate?
+- [ ] Bagaimana penjelasan lebih lanjut tentang application.properties?
+- [ ] Bagaimana cara kerja pom xml?
+- [ ] Bagaimana fungsionalitas dari form hendler?
+- [ ] Bagaimana menemukan error di internal service error?
