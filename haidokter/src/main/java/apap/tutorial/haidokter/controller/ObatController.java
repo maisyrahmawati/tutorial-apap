@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ObatController {
@@ -29,7 +28,7 @@ public class ObatController {
             Model model
     ) {
         ObatModel obat = new ObatModel();
-        ResepModel resep = resepService.getResepByNomorResep(noResep);
+        ResepModel resep = resepService.getResepByNomorResep(noResep).get();
         obat.setResepModel(resep);
         model.addAttribute("obat", obat);
 
@@ -47,13 +46,49 @@ public class ObatController {
         return "add-obat";
     }
 
-//    @GetMapping("/obat/add")
-//    private String obatFormEdit(
-//            @RequestParam(value="id", required = false) Long id,
-//            Model model
-//    ) {
-//        if (id != null){
-//
-//        }
-//    }
+    @GetMapping("/obat/change/{idObat}")
+    private String changeObatFormPage(
+            @PathVariable Long idObat,
+            Model model
+    ) {
+        ObatModel existingObat = obatService.getObatById(idObat);
+        model.addAttribute("obat", existingObat);
+
+        return "form-update-obat";
+    }
+
+    @PostMapping("/obat/change")
+    private String changeObatFormSubmit(
+            @ModelAttribute ObatModel obat,
+            Model model
+    ) {
+        ObatModel newObatData = obatService.changeObat(obat);
+        model.addAttribute("obat", newObatData.getNama());
+
+        return "update-obat";
+    }
+
+    @PostMapping(value="/obat/delete")
+    public String deleteMenuFormSubmit(
+            @ModelAttribute ResepModel resep,
+            Model model
+    ) {
+        model.addAttribute("obatCount", resep.getListobat().size());
+        for (ObatModel obat : resep.getListobat()) {
+            obatService.deleteObatById(obat.getId());
+        }
+        return "delete-obat";
+    }
+
+    /*@GetMapping("/obat/delete/{idObat}")
+    private String deleteObat(
+            @PathVariable Long idObat,
+            Model model
+    ) {
+        ObatModel obat = obatService.getObatById(idObat);
+        model.addAttribute("obat", obat.getNama());
+        obatService.deleteObatById(idObat);
+
+        return "delete-obat";
+    }*/
 }

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface ResepDb extends JpaRepository<ResepModel, Long> {
     Optional<ResepModel> findByNoResep(Long noResep);
-    List<ResepModel> findAllByOrderByIdDesc();
+    List<ResepModel> findAllByOrderByNoResepDesc();
 }
