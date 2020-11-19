@@ -7,7 +7,7 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar"></nav>
+<nav th:replace="fragments/fragment :: navbar (current='View Resep')"></nav>
 <div class="container-fluid">
     <section>
         <div class="card">
@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="obat, iterationStatus : ${listobat}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                    <tr th:each="obat, iterationStatus : ${listObat}" th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                         <td th:text="${iterationStatus.count}"></td>
                         <td th:text="${obat.id}"></td>
                         <td th:text="${obat.nama}"></td>
@@ -59,8 +59,8 @@
                             <a th:href="@{/obat/change/} + ${obat.id}">Change Obat</a>
                         </td>
                         <td>
-                            <input type="checkbox" th:field="*{listobat}" th:value="${obat.id}"/>
-                            <label th:for="${#ids.prev('listobat')}">Hapus</label>
+                            <input type="checkbox" th:field="*{listObat}" checked="false" th:value="${obat.id}"/>
+                            <label th:for="${#ids.prev('listObat')}">Hapus</label>
                         </td>
                     </tr>
                 </tbody>

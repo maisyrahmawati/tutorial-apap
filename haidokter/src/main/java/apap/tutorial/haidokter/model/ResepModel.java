@@ -30,7 +30,7 @@ public class ResepModel implements Serializable {
     private String catatan;
 
     @OneToMany(mappedBy = "resepModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ObatModel> listobat;
+    private List<ObatModel> listObat;
 
     public Long getNoResep() {
         return noResep;
@@ -64,12 +64,12 @@ public class ResepModel implements Serializable {
         this.catatan = catatan;
     }
 
-    public List<ObatModel> getListobat() {
-        return listobat;
+    public List<ObatModel> getListObat() {
+        return listObat;
     }
 
-    public void setListobat(List<ObatModel> listobat) {
-        this.listobat = listobat;
+    public void setListObat(List<ObatModel> listObat) {
+        this.listObat = listObat;
     }
 }
 
