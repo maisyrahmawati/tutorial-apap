@@ -41,9 +41,4 @@ public class ResepServiceImpl implements ResepService {
     public void deleteResep(Long noResep) {
         resepDb.deleteById(noResep);
     }
-
-    /*@Override
-    public List<ResepModel> getAllResepDesc(){
-        return resepDb.findAllByOrderByNoResepDesc();
-    }*/
 }

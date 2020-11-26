@@ -212,3 +212,62 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana cara kerja pom xml?
 - [ ] Bagaimana fungsionalitas dari form hendler?
 - [ ] Bagaimana menemukan error di internal service error?
+
+## Tutorial 5
+### What I have learned today
+Pada tutorial kali ini, saya banyak belajar tentang web service. Selain itu, saya juga mempelajari tentang bagaimana
+cara menggunakan postman. Sejujurnya, saya sendiri masih mengalami beberapa kendala dalam mengoperasikan postman karena ini
+pertama kalinya saya menggunakan aplikasi tersebut. Terkait dengan web service, saya mendapatkan ilmu baru seperti tahu tentang
+anotasi baru yaitu JsonIgnoreProperties dan JsonProperty. Selain itu, saya juga mempelajari mengenai web client.
+### Pertanyaan
+1. Apa itu Postman? Apa kegunaannya?
+Postman adalah salah satu tool atau alat atau aplikasi yang digunakan oleh para developer untuk melakukan proses pembuatan, 
+developing atau testinG API, di mana Postman menyediakan banyak fitur ada yang berbayar (paid) tetapi ada pula yang gratis 
+(free). Beberapa contoh fitur free yang disediakan oleh Postman diantaranya Sharing Collection API for Documentation dan Testing
+API. Sedangkan untuk fitur paid, Postman menyediakan fitur Realtime Collaboration Team, Monitoring API, dan Integration. Adanya 
+fitur ini memberikan kemudahan terutama bagi para developer yang dekat dengan hal-hal berbau API.
+Ref: (https://medium.com/skyshidigital/documentation-testing-api-dengan-postman-part-1-5d33e430dca7)
+Kegunaan dari Postman seperti yang telah dijelaskan sebelumnya yaitu membantu dalam proses pembuatan API, pengembangan API, dan 
+testing API. Dalam proses development API, Postman menyediakan fitur:
+- Collection yang memudahkan pengelompokan request sesuai dengan proyek tertentu.
+- Environment untuk menyimpan atribut yang dapat digunakan atau dimanipulasi dalam proses request API.
+- Mock Server yang dapat berguna dengan adanya fitur example response sebagaimana yang telah dipelajari pada tutorial.
+- Response yaitu semacam mockup API.
+Ref: (https://medium.com/@novancimol12/postman-4f181d625fe1#:~:text=Postman%20merupakan%20tool%20untuk%20melakukan,Collection)
+2. Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty!
+@JsonIgnoreProperties berguna untuk menyembunyikan serialisasi properti ketika terjadi atau selama serialization dan untuk 
+mengabaikan pemrosesan JSON properties read ketika terjadi atau selama deserialization. Atau dengan kata lain, @JsonIgnoreProperties
+berguna untuk memberikan tanda pada properti-properti (daftar properti) yang akan diabaikan atau disembunyikan pada suatu class.
+Ref: (https://fasterxml.github.io/jackson-annotations/javadoc/2.6/com/fasterxml/jackson/annotation/JsonIgnoreProperties.html)
+@JsonProperty sifatnya lebih general, anotasi ini berguna untuk memberikan tanda pada method setter dan getter yang non-standard untuk
+digunakan berkaitan dengan Json property. Dari hal tersebut, kita dapat menandai suatu method sebagai method getter dengan menggunakan 
+anotasi @JsonProperty atau anotasi alternatif lain yaitu @JsonGetter dan kita dapat menandai suatu method sebagai method setter dengan
+anotasi @JsonProperty atau anotasi alternatif lain yaitu @JsonSetter terutama ketika kita ingin membaca beberapa data JSON, tetapi 
+entity class target tidak sama persis dengan data tersebut. Jika melihat lagi penggunaan @JsonProperty pada tutorial, maka anotasi tersebut
+digunakan untuk mengganti nama method menjadi nama method yang menggunakan tanda dash(-) di dalamnya.
+Ref: (https://www.baeldung.com/jackson-annotations)
+Ref: (https://www.tutorialspoint.com/jackson_annotations/jackson_annotations_jsonproperty.htm)
+3. Apa kegunaan atribut WebClient?
+Menurut pendapat saya, atribut WebClient diposisikan sebagaimana web client dalam suatu network yang memiliki kaitan dengan web service 
+(web server). Dalam hal ini, WebClient adalah method yang sifatnya final dan dia merupakan method yang meminta informasi dengan cara
+mengakses web service melalui web browser. Pada kasus ini, WebClient digunakan untuk mengirimkan setiap jenis URI yang telah dibuat.
+Oleh karena itu, sebagaimana yang telah dilakukan di dalam tutorial bahwa kita harus melakukan setup WebClient terlebih dahulu untuk 
+memverifikasi bahwa URI yang valid diminta.
+Ref: (https://www.baeldung.com/webflux-webclient-parameters)
+4. Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?
+ResponseEntity adalah suatu entity yang mewakili response HTTP, termasuk di dalamnya header, isi, dan juga status. Dengan menggunakan
+ResponseEntity maka kita dapat menambahkan header dan status code sehingga dapat kita katakan bahwa dengan ResponseEntity maka kita juga 
+dapat mengontrol apapun yang ada di dalam response HTTP termasuk header, isi, dan status code.
+Ref: (https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html)
+BindingResult digunakan sebagai penyimpanan dari hasil validasi dan binding yang dilakukan. Selain itu, BindingResult juga berisi error apa 
+saja yang mungkin telah terjadi. BindingResult akan muncul tepat setelah model yang divalidasi. Jika tidak, Spring akan gagal untuk memvalidasi 
+objek tersebut dan akan terjadi throws an exception.
+Ref: (http://zetcode.com/spring/bindingresult/)
+### Latihan
+Di dalam kode. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Bagaimana melakukan konfigurasi beberapa request seperti PUT dan DEL di dalam postman?
+- [ ] Bagaimana keterkaitan antara satu method dengan method yang lain?
+- [ ] Bagaimana cara mengoperasikan postman?
