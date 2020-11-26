@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,9 +36,9 @@ public class ObatRestServiceImpl implements ObatRestService {
 
     @Override
     public ObatModel getObatById(Long id) {
-        Optional<ObatModel> obat = obatDb.findById(id);
-        if (obat.isPresent()) {
-            return obat.get();
+        ObatModel obat = obatDb.findObatModelById(id);
+        if (obat != null) {
+            return obat;
         }
         else {
             throw new NoSuchElementException();
