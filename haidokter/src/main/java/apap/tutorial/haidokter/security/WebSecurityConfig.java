@@ -21,6 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/resep/**").hasAnyAuthority("APOTEKER")
+                .antMatchers("/addUser").hasAnyAuthority("ADMIN")
+                //asumsi bahwa obat yang ditambahkan oleh APOTEKER juga termasuk multiple obat
+                //asumsi bahwa proses "menambahkan" yang dilakukan APOTEKER juga termasuk change dan delete obat
+                .antMatchers("/obat/**").hasAnyAuthority("APOTEKER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
