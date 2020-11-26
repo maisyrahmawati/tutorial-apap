@@ -19,7 +19,7 @@ public class UserController {
     private String addUserSubmit(@ModelAttribute UserModel user) {
         if (!userService.checkMatchPasswordWithPattern(user.getPassword())){
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 uppercase"
+                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 uppercase!"
             );
         }
         userService.addUser(user);
@@ -53,7 +53,7 @@ public class UserController {
         }
         if (!userService.checkMatchPasswordWithPattern(user.getPassword())){
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 letter"
+                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 uppercase!"
             );
         }
         if (!userService.checkValidConfirmation(newPassword, passConfirm)){
