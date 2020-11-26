@@ -9,6 +9,7 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar (current='Home')"></nav>
     <div class="container-fluid">
+        <h2 th:text="'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
         <h2>Selamat Datang di HaiDokter!</h2>
         <a th:href="@{/resep/viewall}" class="btn btn-success">Lihat Semua Resep</a>
         <a th:href="@{/resep/add}" class="btn btn-outline-success">Tambah Resep</a>
