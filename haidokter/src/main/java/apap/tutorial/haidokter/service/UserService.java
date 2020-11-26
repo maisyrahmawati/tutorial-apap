@@ -13,5 +13,7 @@ public interface UserService {
 
     Boolean checkValidConfirmation(String newPassword, String passConfirm);
 
+    Boolean checkMatchPasswordWithPattern(String password);
+
     UserModel changePassword(UserModel user, String newPassword);
 }

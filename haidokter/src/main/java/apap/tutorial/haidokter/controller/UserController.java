@@ -1,6 +1,5 @@
 package apap.tutorial.haidokter.controller;
 
-import apap.tutorial.haidokter.model.ResepModel;
 import apap.tutorial.haidokter.model.UserModel;
 import apap.tutorial.haidokter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,11 @@ public class UserController {
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     private String addUserSubmit(@ModelAttribute UserModel user) {
+        if (!userService.checkMatchPasswordWithPattern(user.getPassword())){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 uppercase"
+            );
+        }
         userService.addUser(user);
         return "redirect:/";
     }
@@ -45,6 +49,11 @@ public class UserController {
         if (!userService.checkValidOldPassword(user, oldPassword)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Invalid Old Password!"
+            );
+        }
+        if (!userService.checkMatchPasswordWithPattern(user.getPassword())){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 letter"
             );
         }
         if (!userService.checkValidConfirmation(newPassword, passConfirm)){

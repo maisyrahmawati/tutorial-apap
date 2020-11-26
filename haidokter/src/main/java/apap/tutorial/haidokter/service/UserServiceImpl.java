@@ -6,10 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDb userDb;
+
+    //asumsi huruf yang ada di dalam password adalah minimal mengandung 1 huruf kapital
+    private static final String passwordRequirement = "^(?=.*[0-9])(?=.*[A-Z]).{8,}$";
+
+    private static final Pattern patternPassword = Pattern.compile(passwordRequirement);
 
     @Override
     public UserModel addUser(UserModel user) {
@@ -49,6 +57,17 @@ public class UserServiceImpl implements UserService {
         String newpass = encrypt(newPassword);
         String confirmpass = encrypt(passConfirm);
         if (passwordEncoder.matches(newpass, confirmpass)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean checkMatchPasswordWithPattern(String password) {
+        Matcher match = patternPassword.matcher(password);
+        if (match.find()) {
             return true;
         }
         else {
