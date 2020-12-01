@@ -81,4 +81,20 @@ public class UserServiceImpl implements UserService {
         user.setPassword(newpass);
         return userDb.save(user);
     }
+
+    @Override
+    public Boolean checkValidate(UserModel user, UserModel userdb) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String uname = passwordEncoder.encode(user.getUsername());
+        String pass = passwordEncoder.encode(user.getPassword());
+        if (passwordEncoder.matches(uname, userdb.getUsername())) {
+            if (passwordEncoder.matches(pass, userdb.getPassword())) {
+                return true;
+            }
+            return false;
+        }
+        else {
+            return false;
+        }
+    }
 }

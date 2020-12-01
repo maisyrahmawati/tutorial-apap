@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -16,10 +17,15 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    private String addUserSubmit(@ModelAttribute UserModel user) {
+    private String addUserSubmit(@ModelAttribute UserModel user, @ModelAttribute UserModel userdb) {
         if (!userService.checkMatchPasswordWithPattern(user.getPassword())){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Invalid Password, please include at least 8 characters, 1 number, and 1 uppercase!"
+            );
+        }
+        if (!userService.checkValidate(user, userdb)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "User is existing!"
             );
         }
         userService.addUser(user);
