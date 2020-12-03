@@ -18,7 +18,7 @@ public class ResepController {
     @Autowired
     private ResepService resepService;
 
-    @GetMapping("/")
+
     private String home() {
         return "home";
     }

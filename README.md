@@ -271,3 +271,48 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana melakukan konfigurasi beberapa request seperti PUT dan DEL di dalam postman?
 - [ ] Bagaimana keterkaitan antara satu method dengan method yang lain?
 - [ ] Bagaimana cara mengoperasikan postman?
+
+## Tutorial 6
+### What I have learned today
+Pada tutorial kali ini, saya belajar tentang web security, bagaimana kita membuat otentikasi dan otorisasi dari setiap user yang
+masuk ke dalam sistem atau website ini. Selain itu, saya juga mengingat-ingat kembali bagaimana membuat login dan logout dengan
+menggunakan spring boot. Saya juga belajar bagaimana mengoperasikan phpmyadmin (mysql) terutama untuk insert role. Terakhir, saya
+juga mempelajari proses pengambilan username dan password dari database mysql dan menggunakannya untuk proses otentikasi dan otorisasi.
+### Pertanyaan
+1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut 
+diimplementasi?
+Otentikasi merupakan suatu proses "mengenali" pengguna yang masuk ke dalam suatu sistem atau website atau dapat dikatakan bahwa
+proses otentikasi akan memverifikasi siapa yang pengguna yang masuk ke dalam sistem. Biasanya proses otentikasi dilakukan dengan
+mengenali username dan password yang dimasukan oleh pengguna. Sedangkan otorisasi adalah suatu proses yang akan memverifikasi
+apa saja hal-hal yang dapat dilakukan oleh suatu pengguna saat berselancar di dalam sistem atau website atau dapat dikatakan bahwa
+otorisasi akan memverifikasi pengguna terkait akses ke suatu data atau informasi yang ia miliki di dalam sistem atau website.
+Di dalam kode yang telah saya buat, konsep otentikasi dan otorisasi diimplementasi di dalam class WebSecurityConfig.java di dalam 
+package security. Lebih tepatnya, otentikasi ada pada method public void configureGlobal(AuthenticationManagerBuilder auth) sebelum 
+username dan password diambil dari database dan pada method public void configAuthentication(AuthenticationManagerBuilder auth) ketika 
+username dan password diambil dari database. Sementara otorisasi ada pada method protected void configure(HttpSecurity http) seperti
+pada baris .antMatchers("/resep/**").hasAnyAuthority("APOTEKER") dan pada class UserDetailsServiceImpl.java.
+2. Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerjanya!
+BCryptPasswordEncoder adalah suatu constructor (class, encoder) yang memang disediakan oleh Spring Security untuk melakukan hashing
+dengan menggunakan algoritma "bcrypt" 16 byte random. Selain BCryptPasswordEncoder, Spring Security juga menyediakan StandardPasswordEncoder 
+dan NoOpPasswordEncoder terkait dengan proses hashing. BCryptPasswordEncoder meng-implements interface PasswordEncoder sebagai mekanisme
+password hashing. BCryptPasswordEncoder sangat direkomendasikan ketika proses hashing tidak diperlukan tetapi akan memakan waktu yang
+lebih banyak. Bcrypt akan menyimpan salt yang ada di dalam nilai hash itu sendiri. Nantinya, hash value yang akan dihasilkan akan mengandung
+BCrypt algorithm version, strength of the algorithm, dan generated salt yang dihasilkan secara random.
+Ref: https://terasolunaorg.github.io/guideline/1.0.x/en/Security/PasswordHashing.html
+3. Jelaskan secara singkat apa itu UUID beserta penggunaannya!
+UUID merupakan bagian dari spring session, yang digunakan untuk menyimpan session (sesi) dari user yang masuk ke dalam sistem atau website.
+UUID digunakan melalui pendefinisian di dalam model yang kita buat yaitu melalui anotasi @GenericGenerator sebagai value dari strategy yang digunakan.
+4. Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut padahal kita sudah memiliki class UserRoleServiceImpl.java?
+class UserDetailsServiceImpl.java berguna untuk melakukan otorisasi pada user yang masuk ke dalam sistem atau website di mana otorisasi akan
+digenerated dari username dan role dari username tersebut. Class UserDetailsServiceImpl.java berbeda dengan UserRoleServiceImpl.java di mana class
+UserRoleServiceImpl.java digunakan untuk menambahkan user dan encrypt password dengan BCryptPasswordEncoder. Class UserDetailsServiceImpl.java
+penting dan tanpa adanya class tersebut maka otorisasi sesuai dengan role dari username tidak dapat dihasilkan dan semua user tidak ada pembagian
+hak akses di dalam sistem atau website.
+### Latihan
+Di dalam kode. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Bagaimana mengatasi masalah database mysql yang tidak dapat dijalankan pada xampp?
+- [ ] Mengapa sering sekali muncul error unable to start web server ketika mengerjakan tutorial?
+- [ ] Bagaimana melalukan matched verifikasi username dan password yang diinput user dengan data di dalam database?
