@@ -23,6 +23,11 @@ export default class App extends React.Component {
         if (listMovies > 0) this.setState({ list: list.filter(list => list != listMovies)});
     };
 
+    checkList() {
+        const { favItems } = this.state;
+        if (favItems == null) return ("Belum ada item yang dipilih");
+    }
+
     render() {
         const { favItems } = this.state;
 
@@ -45,7 +50,7 @@ export default class App extends React.Component {
                             <List
                                 type="List"
                                 title="My Favorites"
-                                items={favItems}
+                                items={favItems.checkList()}
                                 onItemClick={this.handleItemClick}
                             />
                             <button
