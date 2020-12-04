@@ -18,6 +18,11 @@ handleItemClick = (item) => {
     this.setState({ favItems: newItems });
 };
 
+deleteList = (listMovies) {
+  const {list} = this.state;
+  if (listMovies > 0) this.setState({ list: list.filter(list => list != listMovies)})
+}
+
 render() {
     const { favItems } = this.state;
 
@@ -37,6 +42,11 @@ render() {
                         />
                     </div>
                     <div className="col-sm">
+                        <button
+                          type="button"
+                          className="list-group-item list-group-item-action flex-column align-items-start w-100 mb-3"
+                          onClick={this.deleteList}
+                        >
                         <List
                             title="My Favorites"
                             items={favItems}
