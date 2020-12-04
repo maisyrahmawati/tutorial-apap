@@ -28,6 +28,13 @@ export default class App extends React.Component {
         if (favItems == null) return ("Belum ada item yang dipilih");
     }
 
+    isFavItems = () => this.state.favItems;
+
+    toogleSwitch = events => {
+      favorite = isFunction(favorite) ? favorite() : favorite;
+      this.setState({ favorite: !this.isFavItems});
+    }
+
     render() {
         const { favItems } = this.state;
 
@@ -39,6 +46,12 @@ export default class App extends React.Component {
                 </p>
                 <div className="container pt-3">
                     <div className="row">
+                        <div className="col-md">
+                          <label className="switch">
+                            <input onItemClick={this.toogleSwitch} />
+                            <span className="slider round"></span>
+                          </label>
+                        </div>
                         <div className="col-sm">
                             <List
                                 title="List Movies"
@@ -48,7 +61,7 @@ export default class App extends React.Component {
                         </div>
                         <div className="col-sm">
                             <List
-                                type="List"
+                                className="List"
                                 title="My Favorites"
                                 items={favItems.checkList()}
                                 onItemClick={this.handleItemClick}
