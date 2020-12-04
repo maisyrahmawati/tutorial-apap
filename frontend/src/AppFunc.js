@@ -11,7 +11,7 @@ function App() {
         const newItem = { ...item };
         const targetInd = newItems.findIndex(it => it.id === newItem.id);
         if (targetInd < 0) newItems.push(newItem);
-        else newItems.splice(targetInd, 1);
+        // else newItems.splice(targetInd, 1);
         setFavItems(newItems);
     }
 
