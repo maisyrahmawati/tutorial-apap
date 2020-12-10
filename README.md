@@ -316,3 +316,61 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Bagaimana mengatasi masalah database mysql yang tidak dapat dijalankan pada xampp?
 - [ ] Mengapa sering sekali muncul error unable to start web server ketika mengerjakan tutorial?
 - [ ] Bagaimana melalukan matched verifikasi username dan password yang diinput user dengan data di dalam database?
+
+## Tutorial 7
+### What I have learned today
+Pada tutorial kali ini, saya cukup mengalami kesulitan terutama saat menginstall npm untuk create-react-app dan untuk membuat create-react-app 
+frontend. Saya masih tidak memahami mengapa saya tidak kunjung dapat menginstall npm dan membuat frontend. Hal ini membuat saya tidak dapat menyelesaikan
+tutorial kali ini dengan tepat waktu. Walaupun demikian, pada tutorial kali ini, saya mempelajari mengenai react dan bagaimana kita dapat memanfaatkan
+adanya component dengan data dan interface yang saling terkait.
+### Pertanyaan
+1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi
+dari apa yang Anda jelaskan.
+	Untuk soal nomor 1, menurut ide saya, untuk mengilangkan checkbox pada item di list pada bagian kiri, saya menggunakan approach yaitu
+menghilangkan type dari input pada index.js di dalam component Item. Pada index.js di dalam component Item, saya menghilangkan type="checkbox"
+dengan melakukan comment line pada type="checkbox" tersebut. Dengan menghilangkan type="checkbox" maka checkbox pada item di list bagian kiri
+juga akan hilang (tidak terlihat).
+	Untuk soal nomor 2, untuk dapat membuat button yang dapat menghapus semua list favorit apabila diklik yaitu dengan membuat deleteList
+(listMovies) pada component App.js. Isi dari method tersebut yaitu baris pertama adalah const list = [ ...this.state.favItems] yaitu list yang 
+akan terisi dengan item-item yang menjadi favorit. Selanjutnya dilakukan conditional dengan if (listMovies > 0) this.setState({ list: list.filter
+(list => list != listMovies)}) yang menunjukkan bahwa jika listMoviesnya lebih dari nol (terdapat movie favorite) maka list akan difilter. 
+Selanjutnya, saya membuat button Delete pada bagian render di dalam component App.js dengan keterangan onClick={this.deleteList("List")} yang 
+menyatakan jika button diklik maka akan menghapus list movie favorit.
+	Untuk soal nomor 3, untuk membuat list pada bagian hanya melakukan operasi Add, maka pada component App.js, saya melakukan comment line untuk 
+baris else newItems.splice(targetInd, 1) pada method handleItemClick. Begitu pula pada component AppFunc.js, saya juga melakukan comment line untuk 
+baris else newItems.splice(targetInd, 1) pada function handleItemClick. Hal ini dikarenakan method splice akan menghapus targetId sebanyak 1 elemen. 
+Adanya method splice membuat list pada bagian kiri dapat menghapus item pada bagian kanan. Oleh karena itu, method ini perlu dihilangkan untuk membuat 
+bagian kiri hanya melakukan operasi Add saja.
+	Untuk soal nomor 4, untuk membuat toggle on dan of, pertama-tama saya membuat method isFavItem pada component App.js yang akan mengetahui apakah 
+suatu item adalah favorite atau bukan. Selanjutnya, saya membuat method toogleSwitch juga pada component App.js, dimana di dalam method ini akan di 
+setState bahwa item bukan merupakan item favorite. Selanjutnya, dibuat pula toogle slinder round pada bagian render di dalam component App.js yang 
+akan memanggil method toogleSwitch.
+	Untuk soal nomor 5, untuk menampilkan pesan Belum ada item yang dipilih pada bagian kanan jika daftar favorite masih kosong, pertama-tama saya 
+membuat method checkList() pada component App.js yang akan melakukan pengecekan jika favItems adalah null maka akan mengembalikan pesan Belum ada item 
+yang dipilih. favItem merupakan const yang saya buat dengan isi this.state. Kemudian pada render masih di dalam component App.js, pada tag List yang 
+kedua saya membuat nilai items adalah favItems.checkList() yang berarti favItems akan memanggil method checkList() dan melakukan pengecekan.
+2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
+State dan props adalah suatu data. State dan props tersimpan di dalam components. Perbedaan dari state dan props yaitu state sifatnya 
+private yang artinya data yang state hanya memiliki relevansi dengan components sebagai tempat state disimpan. Karena sifatnya tersebut, 
+state dapat menyimpan dan mengubah datanya sendiri di dalam components. Sedangkan props atau property memiliki penggunaan yang serupa 
+dengan proses penambahan atribut di dalam tag HTML. Karena props memiliki proses layaknya atribut HTML maka value dari props lebih bersifat 
+read-only atau tidak dapat diubah nilainya. Props digunakan juga untuk melakukan komunikasi antar components.
+3. Apa keuntungan menggunakan component (e.g. List, Item) di React? Berikan contohnya!
+Keuntungan menggunakan components di dalam React yaitu kita dapat menyimpan data yang kita gunakan serta UI (User Interface) dari aplikasi 
+yang akan dibuat. Dalam hal ini UI dan data memiliki keterkaitan satu sama lain di mana UI sangat bergantung kepada data yang tersimpan 
+sehingga jika kita akan mengubah tampilan UI dari aplikasi yang kita bangun, maka kita harus mengubah pula data yang akan kita gunakan. 
+Dengan adanya components, maka akan memudahkan kita dalam mengolah data sekaligus UI.
+4. Menurut kamu, apa saja kelebihan menggunakan React dalam pengembangan web?
+Kelebihan penggunaan React dalam pengembangan web yaitu dengan menggunakan React maka aplikasi web yang kita bangun akan bersifat lebih dinamis 
+dan component yang telah kita buat sifatnya reuse atau dapat digunakan kembali.
+5. Menurut kamu, apa saja kekurangan menggunakan React dalam pengembangan web?
+Kekurangan penggunaan React dalam pengembangan web yaitu dokumentasi dari React kurang banyak dan adanya pencampuran antara HTML dan JavaScript 
+juga cukup membingungkan apalagi untuk para pemula.
+### Latihan
+Di dalam kode. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Apa yang menyebabkan sulitnya menginstall npm create-react-app dan membuat app frontend?
+- [ ] Bagaimana caranya mengatasi dan mengetahui letak error dari kode-kode yang dibuat?
+- [ ] Bagaimana implementasi dari props dan state yang benar?
