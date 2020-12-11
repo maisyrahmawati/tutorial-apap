@@ -374,3 +374,62 @@ dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
 - [ ] Apa yang menyebabkan sulitnya menginstall npm create-react-app dan membuat app frontend?
 - [ ] Bagaimana caranya mengatasi dan mengetahui letak error dari kode-kode yang dibuat?
 - [ ] Bagaimana implementasi dari props dan state yang benar?
+
+## Tutorial 8
+### What I have learned today
+Pada tutorial kali ini, saya mempelajari bagaimana proses retrieve data dari database melalui backend ke frontend. Saya mulai memahami
+penggunaan state dan props dibandingkan dengan tutorial sebelumnya. Selain itu, saya juga mempelajari bagaimana membuat fitur Add, Edit,
+dan Delete sebuah resep melalui frontend. Melalui fitur tersebut, saya juga mempelajari penggunaan dan pembuatan method lainnya seperti 
+membuat filter. Walaupun masih belum begitu memahami component lifecycle, tapi saya sudah sedikit mempelajari method-method tertentu melalui
+latihan pada tutorial kali ini.
+### Pertanyaan
+1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian melakukan langkah - langkah tersebut?
+Untuk penyelesaian masalah latihan nomor 1, pertama saya membuat sebuah const yaitu initState yang berisi namaDokter, namaPasien, dan
+catatan yang masih kosong. Const initState ini saya buat sengaja di luar class ResepList agar lebih mudah. Selanjutnya, karena data yang
+diinput oleh user harus di reset setelah data tersebut di submit (create) maka proses reset data ini dilakukan pada method handleSubmitAddResep
+(event) dimana method ini akan memanggil method handleCancel(event) sehingga proses reset sebenarnya berada pada method handleCancel(event).
+Pada method handleCancel(event), terdapat setting state dengan this.setState({ isCreate: false, isEdit: false , ...initState }). Statement ini
+membuat adanya setting state ke initState, sehingga value dari namaDokter, namaPasien, dan catatan akan tereset menjadi kosong.
+2. Jelaskan fungsi dari async dan await!
+Async dan await saling memiliki keterkaitan satu sama lain. Keduanya memiliki fungsi untuk mengatasi asynchronous pada Javascript. Dengan adanya 
+Async dan Await maka kode asynchronous dapat terlihat seperti kode synchronous karena baris kode tersusun rapi. Keterkaitan await dengan async dapat
+dilihat ketika fungsi await berada di dalam async. Hal ini karena memang fungsi await hanya dapat berada di dalam fungsi async. Async berfungsi untuk
+mengubah suatu function menjadi asynchronous. Sedangkan await berfungsi untuk menunda proses eksekusi kode sampai proses asynchronous yang sebelumnya
+telah selesai dilakukan. Contohnya pada method async loadData(), this.setState({ reseps: data }) tidak akan dieksekusi sebelum proses 
+APIConfig.get("/reseps") selesai dilakukan.
+Referensi: https://medium.com/skyshidigital/promise-lets-async-await-76122d134eb
+Referensi: https://medium.com/coderupa/panduan-komplit-asynchronous-programming-pada-javascript-part-4-async-await-fc504c344238
+3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 8 pada Component Lifecycle pada pertanyaan ini.
+<img src="3.jpg" width="400">
+<img src="8.jpg" width="400"> <img src="8-changestate2.jpg" width="400">
+<img src="9-full.jpg" width="700"> <img src="9.jpg" width="400">
+4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount.
+Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.
+	componentDidMount digunakan untuk menjalankan action setelah seluruh components telah dibuat. componentDidMount dipanggil pada saat
+sebuah komponen dibuat dan dimasukkan ke dalam DOM. Biasanya use case yang menggunakan componentDidMount adalah inisialisasi (initial state
+atau default props) --> Mounting. Contoh penggunaan ini adalah pemanggilan AJAX yang dapat menyebabkan render ulang komponen yang harus masuk 
+ke method componentDidMount. Pada tutorial 8, method ini digunakan untuk pemanggilan loadData().
+	shouldComponentUpdate digunakan untuk melakukan proses kontrol re-rendering. shouldComponentUpdate dipanggil setelah props atau state 
+dari component mengalami perubahan. Contohnya pada tutorial 8, yaitu adanya perubahan true dan false ketika Add Resep diklik. Biasanya use case
+yang menggunakan shouldComponentUpdate adalah ketika pengupdatena yang mengutamakan performance optimizing seperti membuat keputusan pe-renderan
+ulang suatu component ketika diubah harus dilakukan atau tidak.
+	componentDidUpdate digunakan untuk melakukan post-update action (aksi setelah dilakukan post-update). componentDidUpdate dipanggil setelah suatu
+component di-render ulang. Use yang biasanya dan harus menggunakan componentDidUpdate adalah proses updating yang harus dilakukan saat working 
+dilakukan diluar React, seperti proses enkapsulasi dari third-party.
+	componentWillReceiveProps dipanggil sebelum sebuah component menerima nilai props yang telah diubah. Sama seperti shouldComponentUpdate dan 
+componentDidUpdate, method componentWillReceiveProps digunakan untuk case-case proses updating terutama update nilai props.
+	componentWillUnmount digunakan untuk melakukan proses pembersihan (clean-up) di akhir masa lifecycle (fase keberadaan suatu objek). Seperti
+namanya, componentWillUnmount dipanggil ketika proses unmounting atau ketika component dihapus dari DOM. Pada tutorial kali ini, sebenarnya kita
+tidak menggunakan method ini karena tidak terjadi penghapusan component. Use case yang biasanya menggunakan method componentWillUnmount adalah
+ketika menghapus third-party Obat.
+Referensi: https://rangle.github.io/react-training/react-lifecycles/
+### Latihan
+Di dalam kode. 
+### What I did not understand
+(tuliskan apa saja yang kurang Anda mengerti, Anda dapat men-_check_ apabila Anda sudah mengerti
+dikemudian hari, dan tambahkan tulisan yang membuat Anda mengerti)
+- [ ] Bagaimana melakukan if conditional di dalam return statement?
+- [ ] Bagaimana membuat if conditional (khusus untuk if tanpa else) di dalam return statement?
+- [ ] Apakah ada pengaruh dari adanya tulisan Err saat menginstal npm react-paginate?
+- [ ] Faktor apa yang mempengaruhi munculnya npm check update failed dan sebenarnya apakah ada 
+pengaruhnya dengan react app yang dibuat?
