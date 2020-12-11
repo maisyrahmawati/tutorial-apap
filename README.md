@@ -402,7 +402,7 @@ Referensi: https://medium.com/coderupa/panduan-komplit-asynchronous-programming-
 3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 8 pada Component Lifecycle pada pertanyaan ini.
 <img src="3.jpg" width="400">
 <img src="8.jpg" width="400"> <img src="8-changestate2.jpg" width="400">
-<img src="9-full.jpg" width="600"> <img src="9.jpg" width="400">
+<img src="9-full.jpg" width="700"> <img src="9.jpg" width="400">
 4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount.
 Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.
 	componentDidMount digunakan untuk menjalankan action setelah seluruh components telah dibuat. componentDidMount dipanggil pada saat
