@@ -4,6 +4,7 @@ import classes from "./styles.module.css";
 import APIConfig from "../../api/APIConfig";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
+//import ReactPaginate from "react-paginate"; //ini ide soal bonus latihan nomor 4 tapi belum jalan
 
 const initState = {
     namaDokter: "",
@@ -20,9 +21,11 @@ class ResepList extends Component {
             isCreate: false,
             isEdit: false,
             search: null,
+            //ini ide soal bonus latihan nomor 4 tapi belum jalan
             //offset: 0,
             //perPage: 5,
             //currentPage: 0,
+            //pageCount: 0,
             namaDokter: "",
             namaPasien: "",
             catatan: "",
@@ -36,6 +39,9 @@ class ResepList extends Component {
         this.handleEditResep = this.handleEditResep.bind(this);
         this.handleSubmitEditResep = this.handleSubmitEditResep.bind(this);
         this.handleDeleteResep = this.handleDeleteResep.bind(this);
+        //ini ide soal bonus latihan nomor 4 tapi belum jalan
+        //this.handlePagination = this.handlePagination.bind(this);
+        //this.handlePageCount = this.handlePageCount.bind(this);
     }
 
     componentDidMount() {
@@ -125,12 +131,21 @@ class ResepList extends Component {
         this.setState({ search:keyword });
     }
 
+    
+    //ini ide soal bonus latihan nomor 4 tapi belum jalan
     /* handlePagination = (event) => {
         const selectPage = event.selected;
         const offset = selectPage * this.state.perPage;
         this.setState({ currentPage: selectPage, offset: offset}, () => {this.loadData()});
     } */
+    //ini ide soal bonus latihan nomor 4 tapi belum jalan
+    /* handlePageCount() {
+        const dataResep = this.state.reseps;
+        this.setState({ pageCount: Math.ceil(dataResep.length / this.state.perPage) });
+    } */
         
+
+
     // shouldComponentUpdate(nextProps, nextState) {
     //     console.log("shouldComponentUpdate()");
     //     return true;
@@ -245,6 +260,20 @@ class ResepList extends Component {
                 </Modal>
             </div>
         );
+
+        //ini ide untuk soal bonus latihan nomor 4 tapi belum jalan
+        /* return(
+            <div>
+                <ReactPaginate 
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    pageCount={this.handlePageCount}
+                    onPageChange={this.handlePagination}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                />
+            </div>
+        ); */
     }
 }
 
