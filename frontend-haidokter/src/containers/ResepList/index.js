@@ -5,6 +5,13 @@ import APIConfig from "../../api/APIConfig";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 
+
+const initState = {
+    namaDokter: "",
+    namaPasien: "",
+    catatan: "",
+}
+
 class ResepList extends Component {
     constructor(props) {
         super(props);
@@ -91,7 +98,7 @@ class ResepList extends Component {
 
     handleCancel(event) {
         event.preventDefault();
-        this.setState({ isCreate: false, isEdit: false });
+        this.setState({ isCreate: false, isEdit: false , ...initState});
     }
 
     handleChangeField(event) {
@@ -143,7 +150,8 @@ class ResepList extends Component {
                 </div>
                 <Modal 
                     show={this.state.isCreate || this.state.isEdit}
-                    handleCloseModal={this.handleCancel}>
+                    handleCloseModal={this.handleCancel}
+                    >
                     <form>
                         <h3 className={classes.modalTitle}>
                             {this.state.isCreate
