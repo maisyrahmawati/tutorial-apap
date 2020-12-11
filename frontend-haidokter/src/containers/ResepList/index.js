@@ -12,6 +12,7 @@ class ResepList extends Component {
             reseps: [],
             isLoading:false,
             isCreate: false,
+            isEdit: false,
             namaDokter: "",
             namaPasien: "",
             catatan: "",
@@ -21,6 +22,9 @@ class ResepList extends Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChangeField = this.handleChangeField.bind(this);
         this.handleSubmitAddResep = this.handleSubmitAddResep.bind(this);
+        this.handleEditResep = this.handleEditResep.bind(this);
+        this.handleSubmitEditResep = this.handleSubmitEditResep.bind(this);
+        this.handleDeleteResep = this.handleDeleteResep.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +56,33 @@ class ResepList extends Component {
             console.log(error);
         }
         this.handleCancel(event);
+    }
+
+    async handleSubmitEditResep(event) {
+        event.preventDefault();
+        try {
+            const data = {
+                namaDokter: this.state.namaDokter,
+                namaPasien: this.state.namaPasien,
+                catatan: this.state.catatan,
+            };
+            await APIConfig.put(`/resep/${this.state.noResep}`, data);
+            this.loadData();
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
+        this.handleCancel(event);
+    }
+
+    async handleDeleteResep(noResep) {
+        try {
+            await APIConfig.delete(`/resep/${noResep}`);
+            this.loadData();
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
     }        
 
     handleAddResep() {
@@ -60,13 +91,23 @@ class ResepList extends Component {
 
     handleCancel(event) {
         event.preventDefault();
-        this.setState({ isCreate: false });
+        this.setState({ isCreate: false, isEdit: false });
     }
 
     handleChangeField(event) {
         const { name, value } = event.target;
         this.setState({ [name]: value });
-    }        
+    }
+    
+    handleEditResep(resep) {
+        this.setState({
+            isEdit: true,
+            noResep: resep.noResep,
+            namaDokter: resep.namaDokter,
+            namaPasien: resep.namaPasien,
+            catatan: resep.catatan,
+        });
+    }
         
     // shouldComponentUpdate(nextProps, nextState) {
     //     console.log("shouldComponentUpdate()");
@@ -90,17 +131,25 @@ class ResepList extends Component {
                 <div>
                     {this.state.reseps.map((resep) => (
                     <Resep
-                    key={resep.noResep}
-                    noResep={resep.noResep}
-                    namaDokter={resep.namaDokter}
-                    namaPasien={resep.namaPasien}
-                    catatan={resep.catatan}
+                        key={resep.noResep}
+                        noResep={resep.noResep}
+                        namaDokter={resep.namaDokter}
+                        namaPasien={resep.namaPasien}
+                        catatan={resep.catatan}
+                        handleEdit={() => this.handleEditResep(resep)}
+                        handleDelete={() => this.handleDeleteResep(resep.noResep)}
                     />
                     ))}
                 </div>
-                <Modal show={this.state.isCreate} handleCloseModal={this.handleCancel}>
+                <Modal 
+                    show={this.state.isCreate || this.state.isEdit}
+                    handleCloseModal={this.handleCancel}>
                     <form>
-                        <h3 className={classes.modalTitle}>Add Resep</h3>
+                        <h3 className={classes.modalTitle}>
+                            {this.state.isCreate
+                            ? "Add Resep"
+                            : `Edit Resep Nomor ${this.state.noResep}`}
+                        </h3>
                         <input
                             className={classes.textField}
                             type="text"
@@ -125,8 +174,15 @@ class ResepList extends Component {
                             value={this.state.catatan}
                             onChange={this.handleChangeField}
                         />
-                        <Button onClick={this.handleSubmitAddResep} variant="primary">
-                            Create
+                        <Button
+                            onClick={
+                                this.state.isCreate
+                                ? this.handleSubmitAddResep
+                                : this.handleSubmitEditResep
+                            }
+                            variant="primary"
+                        >
+                            {this.state.isCreate ? "Create" : "Edit"}
                         </Button>
                         <Button onClick={this.handleCancel} variant="danger">
                             Cancel
