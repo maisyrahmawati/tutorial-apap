@@ -20,6 +20,7 @@ class ResepList extends Component {
             isLoading:false,
             isCreate: false,
             isEdit: false,
+            search: null,
             namaDokter: "",
             namaPasien: "",
             catatan: "",
@@ -115,6 +116,11 @@ class ResepList extends Component {
             catatan: resep.catatan,
         });
     }
+
+    searchBar = (event) => {
+        let keyword = event.target.value;
+        this.setState({search:keyword});
+    }
         
     // shouldComponentUpdate(nextProps, nextState) {
     //     console.log("shouldComponentUpdate()");
@@ -129,6 +135,27 @@ class ResepList extends Component {
 
     render() {
         //console.log("render()");
+        const resepItem = this.state.reseps.filter((resep) => {
+            if(this.state.search == null){
+                return resep;
+            }
+            else if(resep.namaDokter.toLowerCase().includes(this.state.search.toLowerCase())){
+                return resep;
+            }
+        }).map((resep) => {
+            return (
+                <Resep
+                    key={resep.noResep}
+                    noResep={resep.noResep}
+                    namaDokter={resep.namaDokter}
+                    namaPasien={resep.namaPasien}
+                    catatan={resep.catatan}
+                    handleEdit={() => this.handleEditResep(resep)}
+                    handleDelete={() => this.handleDeleteResep(resep.noResep)}
+                />
+            )
+        })
+
         return (
             <div className={classes.resepList}>
                 <h1 className={classes.title}>All Reseps</h1>
@@ -136,6 +163,15 @@ class ResepList extends Component {
                     Add Resep
                 </Button>
                 <div>
+                    <input
+                        className={classes.textField}
+                        type="text"
+                        placeholder="Masukkan nama dokter"
+                        onChange={(e) => this.searchBar(e)}
+                    />
+                    {resepItem}
+                </div>
+                {/* <div>
                     {this.state.reseps.map((resep) => (
                     <Resep
                         key={resep.noResep}
@@ -147,7 +183,7 @@ class ResepList extends Component {
                         handleDelete={() => this.handleDeleteResep(resep.noResep)}
                     />
                     ))}
-                </div>
+                </div> */}
                 <Modal 
                     show={this.state.isCreate || this.state.isEdit}
                     handleCloseModal={this.handleCancel}
