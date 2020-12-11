@@ -16,10 +16,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
+        http
+                //.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
+                .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/api/v1/**").permitAll()
                 .antMatchers("/resep/**").hasAnyAuthority("APOTEKER")
                 .antMatchers("/addUser").hasAnyAuthority("ADMIN")
                 //asumsi bahwa obat yang ditambahkan oleh APOTEKER juga termasuk multiple obat
@@ -30,7 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
+                .and()
+                .cors()
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Bean
