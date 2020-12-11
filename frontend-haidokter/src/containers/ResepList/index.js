@@ -5,7 +5,6 @@ import APIConfig from "../../api/APIConfig";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 
-
 const initState = {
     namaDokter: "",
     namaPasien: "",
@@ -21,9 +20,13 @@ class ResepList extends Component {
             isCreate: false,
             isEdit: false,
             search: null,
+            //offset: 0,
+            //perPage: 5,
+            //currentPage: 0,
             namaDokter: "",
             namaPasien: "",
             catatan: "",
+            listObat: [],
         };
         //this.handleClickLoading = this.handleClickLoading.bind(this);
         this.handleAddResep = this.handleAddResep.bind(this);
@@ -99,7 +102,7 @@ class ResepList extends Component {
 
     handleCancel(event) {
         event.preventDefault();
-        this.setState({ isCreate: false, isEdit: false , ...initState});
+        this.setState({ isCreate: false, isEdit: false , ...initState });
     }
 
     handleChangeField(event) {
@@ -119,8 +122,14 @@ class ResepList extends Component {
 
     searchBar = (event) => {
         let keyword = event.target.value;
-        this.setState({search:keyword});
+        this.setState({ search:keyword });
     }
+
+    /* handlePagination = (event) => {
+        const selectPage = event.selected;
+        const offset = selectPage * this.state.perPage;
+        this.setState({ currentPage: selectPage, offset: offset}, () => {this.loadData()});
+    } */
         
     // shouldComponentUpdate(nextProps, nextState) {
     //     console.log("shouldComponentUpdate()");
@@ -150,11 +159,12 @@ class ResepList extends Component {
                     namaDokter={resep.namaDokter}
                     namaPasien={resep.namaPasien}
                     catatan={resep.catatan}
+                    listObat={resep.listObat}
                     handleEdit={() => this.handleEditResep(resep)}
                     handleDelete={() => this.handleDeleteResep(resep.noResep)}
                 />
-            )
-        })
+            );
+        });
 
         return (
             <div className={classes.resepList}>
